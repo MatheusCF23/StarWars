@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import Context from '../context/Context';
 
 function Table() {
-  const { planet } = useContext(Context);
+  const { planet, filter } = useContext(Context);
   return (
     <table>
       <thead>
@@ -23,24 +23,25 @@ function Table() {
         </tr>
       </thead>
       <tbody>
-        {planet.results ? planet.results.map((plan) => (
-          <tr key={ plan.name }>
-            <td>{plan.name}</td>
-            <td>{plan.rotation_period}</td>
-            <td>{plan.orbital_period}</td>
-            <td>{plan.diameter}</td>
-            <td>{plan.climate}</td>
-            <td>{plan.gravity}</td>
-            <td>{plan.terrain}</td>
-            <td>{plan.surface_water}</td>
-            <td>{plan.population}</td>
-            <td>{plan.films}</td>
-            <td>{plan.created}</td>
-            <td>{plan.edited}</td>
-            <td>{plan.url}</td>
-          </tr>
-
-        )) : null}
+        {planet.results ? planet.results
+          .filter((plan) => plan.name.includes(filter))
+          .map((plan) => (
+            <tr key={ plan.name }>
+              <td>{plan.name}</td>
+              <td>{plan.rotation_period}</td>
+              <td>{plan.orbital_period}</td>
+              <td>{plan.diameter}</td>
+              <td>{plan.climate}</td>
+              <td>{plan.gravity}</td>
+              <td>{plan.terrain}</td>
+              <td>{plan.surface_water}</td>
+              <td>{plan.population}</td>
+              <td>{plan.films}</td>
+              <td>{plan.created}</td>
+              <td>{plan.edited}</td>
+              <td>{plan.url}</td>
+            </tr>
+          )) : null}
         ;
       </tbody>
     </table>
